@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StudentRegistrationLogin.Models.Department>
+@Html.Partial("_AdminLayoutHeader")
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <p>
+                            <button class="btn btn-success" style="color:white">
+                                @Html.ActionLink("Create New", "Create", null, new { @style = "color:white" })
+                            </button>
+                        </p>
+                        <h3 class="card-title">Manage Department</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DepartmentName)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-info" style="color:white">@Html.ActionLink("Edit", "Edit", null, new { id = item.DepartmentID }, new { @style = "color:white" })</button>
+                                        <button class="btn btn-danger" style="color:white">@Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID }, new { @style = "color:white" })</button>
+
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+@Html.Partial("_AdminLayoutFooter")

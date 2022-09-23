@@ -1,0 +1,193 @@
+﻿@model StudentRegistrationLogin.Models.RegisterViewModel
+@Html.Partial("_AdminLayoutHeader")
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+@*<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Registration</title>
+        <!-- Google Font: Source Sans Pro -->
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+        <style>
+            .ui-widget-header {
+                background: #cedc98;
+                border: 1px solid #DDDDDD;
+                color: #333333;
+                font-weight: bold;
+            }
+
+            .progress-label {
+                position: absolute;
+                left: 50%;
+                top: 13px;
+                font-weight: bold;
+                text-shadow: 1px 1px 0 #fff;
+            }
+
+            .red {
+                color: red;
+            }
+        </style>
+    </head>*@
+<body class="hold-transition register-page">
+    <div class="register-box" style="margin:auto;width:600px">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>Registration</b></a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Register a new membership</p>
+                <form method="post">
+
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+
+
+                        <div class="input-group mb-3">
+                            @*@Html.DropDownListFor(model => model.PrefixName, new SelectList(ViewBag.Prefix, "Value", "Text"), new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First name" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last name" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.DropDownListFor(model => model.PrefixName, new SelectList(ViewBag.Prefix, "Value", "Text"),new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.EditorFor(model => model.PrefixName, new { htmlAttributes = new { @class = "form-control", placeholder = "Prefix" } })*@
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.PrefixName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "Date of Birth" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-birthday-cake"></span>
+                                </div>
+                            </div>
+                            @Html.DropDownListFor(model => model.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), "Select Role", new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                        </div>                        
+                        
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Retype password" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <div id="FileBrowse">
+                            <div class="input-group mb-3">
+                                <input type="file" id="imageBrowes" />
+
+                            </div>
+                            <div id="imgPreview" class="thumbnail" style="display:none">
+                                <img class="img-responsive" id="targetImg" width="50" height="50" />
+                                <div class="caption">
+                                    <a href="#" onclick="ClearPreview()" style="width:10px"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <span id="description"></span>
+                                </div>
+                                <input type="button" id="btnUpload" value="Upload" class="btn btn-info" />
+                                @*<input type="button" id="btnUpload" class="btn btn-info" value="Upload" onclick="Uploadimage()" />*@
+                                <p id="SuccessMsg" class="text-center text-success"></p>
+                                @*<a href="#" class="btn btn-default" onclick="Uploadimage()">Upload</a>*@
+                            </div>
+                        </div>
+                        <div class="col-md-2 thumbnail" id="uploadedImage">
+                        </div>
+                        <br />                      
+
+                        <div class="progress-bar progress-bar-striped active" id="fileProgress">
+                            <progress role="progressbar" style="display:none" aria-valuemin="0" aria-valuemax="100"></progress>
+                        </div>
+                        <br />
+                        <span id="lblMessage" style="color: Green"></span>
+                        <br />
+                        <div class="col-12">
+                            <button type="submit" id="btnImage" class="btn btn-primary btn-block">Register</button>
+                        </div>
+                        
+                    }
+                </form>
+                
+                @Html.ActionLink("Back to List", "Index","Register")
+                
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <script src="~/Scripts/hospital.js"></script>
+
+</body>
+@Html.Partial("_AdminLayoutFooter")
+

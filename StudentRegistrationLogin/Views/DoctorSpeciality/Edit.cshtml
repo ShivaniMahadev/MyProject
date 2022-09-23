@@ -1,0 +1,76 @@
+﻿@model StudentRegistrationLogin.Models.DoctorSpeciality
+@Html.Partial("_AdminLayoutHeader")
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<div class="login-box" style="max-width:500px;margin:auto;">
+    <div class="card card-outline card-primary">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="card-header text-center">
+                    <a class="h1"><b>Doctor Speciality</b></a>
+                </div>
+                <div class="card-body">
+                    <p class="login-box-msg">Edit Doctor Speciality</p>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DoctorName, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.DoctorName, new SelectList(ViewBag.Doctors, "Value", "Text"),new { @class = "form-control", id = "docid" })
+                            @Html.ValidationMessageFor(model => model.DoctorName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SpecialityName, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.SpecialityName, new SelectList(ViewBag.DoctorSpecialty, "Value", "Text"), new { @class = "form-control", id = "abc"  })
+                            @Html.ValidationMessageFor(model => model.SpecialityName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.CreatedDateUtc, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.CreatedDateUtc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CreatedDateUtc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @if (ViewBag.Message != null && ViewBag.Message == "Exist")
+                    {
+                        <p style="color:red;">Doctor Name already exist.</p>
+                    }
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Update</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+@section Styles{
+    @Styles.Render("~/Content/chosen");
+}
+@section Sctipts{
+    @Styles.Render("~/bundles/chosen");
+    <script type="text/javascript">
+        $(function(){
+        $("#abc").chosen({ width: "100%"});
+        $("#docid").chosen({ width: "100%"});
+        });
+    </script>
+}
+@Html.Partial("_AdminLayoutFooter")
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
